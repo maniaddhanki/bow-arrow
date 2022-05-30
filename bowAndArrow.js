@@ -8,7 +8,6 @@ class Arrow {
     this.left = 100;
   }
 
-
   halfHead(top, angle) {
     const halfHeadStyles = new Style();
     halfHeadStyles.attribute('height', '25px');
@@ -20,15 +19,15 @@ class Arrow {
     halfHeadStyles.attribute(...transform(angle));
     const styles = halfHeadStyles.toString();
     return `<div style="${styles}"></div>`;
-  };
+  }
 
   upperHead() {
     return this.halfHead(this.top - 22, 135);
-  };
+  }
 
   bottomHead() {
     return this.halfHead(this.top - 2, 45);
-  };
+  }
 
   arrowBody() {
     const arrowBodyStyles = new Style();
@@ -39,18 +38,18 @@ class Arrow {
     arrowBodyStyles.attribute('top', this.top + 'px');
     arrowBodyStyles.attribute('left', this.left + 'px');
     const styles = arrowBodyStyles.toString();
-    return `<div style="${styles}"></div>`
-  };
+    return `<div style="${styles}"></div>`;
+  }
 
   toHtml() {
     return this.upperHead() + this.bottomHead() + this.arrowBody();
-  };
+  }
 
   moveToRight() {
     this.left = this.left + 20;
     return this.toHtml();
-  };
-};
+  }
+}
 
 const bowCurve = (top, angle) => {
   const style = new Style();
@@ -104,18 +103,18 @@ const bow = () => {
   const arrowPoint = arrowPlacer();
   const upperSting = bowString(100, 200);
   const bottomSting = bowString(225, 160);
-  const bow = '<div style="' + bowStyle() + '">' + upperSting + bottomSting + topCurve + arrowPoint + bottomCurve + '</div>'
+  const bow = '<div style="' + bowStyle() + '">' + upperSting + bottomSting + topCurve + arrowPoint + bottomCurve + '</div>';
   return bow;
 };
 
 const metaHtml = (body) => {
-  const bodyTag = `<body>${body}</body>`
+  const bodyTag = `<body>${body}</body>`;
   return `<html><head><meta http-equiv="refresh" content="0.1"/></head>${bodyTag}</html>`;
-}
+};
 
-const arrow = new Arrow(100, 330)
+const arrow = new Arrow(100, 330);
 const timer = setInterval(() => {
   const html = metaHtml(bow() + arrow.moveToRight());
-  fs.writeFileSync('bowAndArrow.html', html, 'utf8')
+  fs.writeFileSync('bowAndArrow.html', html, 'utf8');
 }, 100);
 setTimeout(() => clearInterval(timer), 6000);
