@@ -97,7 +97,7 @@ const bowStyle = () => {
   return styles.toString();
 };
 
-const bow = () => {
+const makeBow = () => {
   const topCurve = bowCurve(100, 65);
   const bottomCurve = bowCurve(92, 115);
   const arrowPoint = arrowPlacer();
@@ -112,9 +112,13 @@ const metaHtml = (body) => {
   return `<html><head><meta http-equiv="refresh" content="0.1"/></head>${bodyTag}</html>`;
 };
 
-const arrow = new Arrow(100, 330);
-const timer = setInterval(() => {
-  const html = metaHtml(bow() + arrow.moveToRight());
-  fs.writeFileSync('bowAndArrow.html', html, 'utf8');
-}, 100);
-setTimeout(() => clearInterval(timer), 6000);
+const main = () => {
+  const arrow = new Arrow(100, 330);
+  const timer = setInterval(() => {
+    const html = metaHtml(makeBow() + arrow.moveToRight());
+    fs.writeFileSync('bowAndArrow.html', html, 'utf8');
+  }, 100);
+  setTimeout(() => clearInterval(timer), 6000);
+}
+
+main();
