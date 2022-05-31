@@ -119,6 +119,6 @@ const main = () => {
     fs.writeFileSync('bowAndArrow.html', html, 'utf8');
   }, 100);
   setTimeout(() => clearInterval(timer), 6000);
-}
+};
 
 main();
